@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'user/style.css' %}">
+    <title> User sign in </title>
+</head>
+<body>
+<nav class="header">
+    <ul style="display: flex; justify-content: space-around">
+        <li><a class="test" href="">Search</a></li>
+        <li><a class="test" href="">About us</a></li>
+        <li><a class="test" href="">Contact us </a></li>
+        <li><a class="test" href="{% url 'login' %}">Login </a></li>
+    </ul>
+</nav>
+<main>
+    <div style="background-color: #e5b0b0; font-size: large; display: flex; align-items: center; justify-content: center">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}" role="alert">
+                    {{ message }}
+                    <br>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div>
+        <form method="post" class="signup_form" enctype="multipart/form-data">
+            {% csrf_token %}
+            <br><span
+                style="text-align: center; display: flex; font-weight: bold; font-size: larger; justify-content: center;">Registration Form</span><br>
+            <table>
+                <tr>
+                    <td>Verification type:</td>
+                    <td>{{ form.reg_type }}</td>
+                </tr>
+
+                <tr>
+                    <td>Email:</td>
+                    <td>{{ form.email }}</td>
+                </tr>
+                <tr>
+                    <td>Phone number:</td>
+                    <td>{{ form.phone_number }}</td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td>{{ form.password1 }}</td>
+                </tr>
+                <tr>
+                    <td>Password Confirmation:</td>
+                    <td>{{ form.password2 }}</td>
+                </tr>
+                {% if form.password1 == form.password2 or form.cleaned_data %}
+                    {{ form.error_messages.pop }}
+                {% else %}
+                {% endif %}
+            </table>
+            <br>
+            <br>
+            <input class="sign_input"
+                   style="width: 360px; height:30px ;background-color: #d3bad9; font-weight: bold; font-size: medium"
+                   type="submit"
+                   VALUE="Create Account">
+        </form>
+    </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{% extends 'account/profile.html' %}
+{% load post_custom_tags %}
+{% block content %}
+    <p>{{ user }}</p>
+    {% if user not in request.user.follower.all and user != request.user %}
+        <button><a href="/send_friend_request/{{ user.id }}">Send Follow Request</a></button>
+        <br>{% endif %}
+    <div><br>
+        {% user_post user %}</div>
+{% endblock %}

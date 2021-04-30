@@ -1,0 +1,20 @@
+{% if comments %}
+    <br>
+    <div>
+        {% for comment in comments %}
+            <input type="hidden" name="path" value="{{ path }}">
+            <ul style="display: flex; flex-direction: row; justify-content: space-between; padding: 0">
+                <li style="list-style: none ;font-size: 15px ;margin: 0"> {{ comment }}  by {{ comment.user_id }}
+                    {% if user == post.account_id or comment.user_id == user %}
+                        <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropbtn">...</a>
+                        <div class="dropdown-content">
+                            <a href="/post/comment_delete/{{ comment.pk }}">Delete</a>
+                        </div>
+                    {% endif %}</li>
+            </ul>
+        {% endfor %}
+        {% else %}
+        <span>No Comments!</span>
+    </div>
+{% endif %}

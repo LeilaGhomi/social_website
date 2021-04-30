@@ -1,0 +1,9 @@
+{% extends 'account/profile.html' %}
+{% load post_custom_tags %}
+{% block content %}
+    <form enctype="multipart/form-data" class="form" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="btn-changpss" type="submit" value="Update">
+    </form>
+{% endblock %}

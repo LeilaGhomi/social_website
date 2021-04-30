@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User</title>
+</head>
+<body>
+<h2>users</h2>
+<ul>
+    {% for p in user_list %}
+        <li><a href={% url 'user_detail' p.id %}>{{ p.email }}</a></li>
+    {% endfor %}
+</ul>
+</body>
+</html>

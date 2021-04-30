@@ -1,0 +1,166 @@
+.login {
+    width: 350px;
+    height: 500px;
+    border: black 1px solid;
+    position: absolute;
+    left: 500px;
+    bottom: 70px;
+
+}
+
+.text {
+    margin-top: 30px;
+    font-size: 50px;
+    margin-left: 50px;
+    color: mediumorchid;
+
+
+}
+
+.login_form {
+    padding-top: 20px;
+    padding-left: 50px;
+    margin: 5px;
+
+}
+
+.log_input {
+    margin-bottom: 10px;
+    width: 250px;
+    height: 35px;
+    background-color: #F3D9F5;
+    border: none;
+}
+
+.log_in {
+    background-color: #D113E4;
+    border: none;
+    margin-left: 2px;
+    border-radius: 5px;
+    width: 250px;
+    height: 35px;
+}
+
+.forgot_pass {
+    margin-left: 95px;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.message {
+    width: 300px;
+    height: 40px;
+    font-size: 20px;
+    margin-left: 60px;
+    color: crimson;
+}
+
+.sign_up {
+    width: 200px;
+    height: 100px;
+    margin-left: 80px;
+    background-color: mediumorchid;
+    margin-top: 40px;
+    border-radius: 5px;
+    font-size: 20px;
+
+}
+
+.sign_up a {
+    margin-left: 65px;
+    text-decoration: none;
+}
+
+.signup {
+    width: 600px;
+    height: 600px;
+    border: black 1px solid;
+    position: absolute;
+    left: 400px;
+
+}
+
+.signup_form {
+    padding: 35px;
+    margin: 20px;
+    color: #3b0c3b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sign_input {
+    margin-bottom: 10px;
+    width: 100px;
+    height: 35px;
+    background-color: #f3d9f5;
+    border: none;
+}
+
+body {
+    margin: 0;
+
+}
+
+.header {
+    background-color: #e2aadd;
+    color: cornsilk;
+    height: 60px;
+    font-size: 30px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.header ul {
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #e3bedd;
+    height: 60px;
+    padding: 0;
+}
+
+.header ul li {
+    font-size: 20px;
+    font-weight: bold;
+    float: right;
+    text-decoration: none;
+    color: black;
+
+}
+
+main {
+    float: left;
+    background: white;
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    font-size: large;
+}
+
+
+li {
+    font-size: 20px;
+    font-weight: bold;
+    float: right;
+    text-decoration: none;
+
+}
+
+li a, .dropbtn {
+    display: inline-block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/*__________profile__________*/

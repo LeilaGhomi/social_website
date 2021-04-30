@@ -1,0 +1,78 @@
+{% extends 'account/profile.html' %}
+{% load static %}
+{% load post_custom_tags %}
+{% static 'user/pro_style.css' %}
+{% block title %}My Posts{% endblock %}
+{% block content %}
+    {% if my_post_list %}
+        <div>
+            {% for post in my_post_list %}
+                <ul style="display: flex; flex-direction: row-reverse; justify-content: space-between; padding: 0">
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropbtn">...</a>
+                        <div class="dropdown-content">
+                            <a href="/post/edit_post/{{ post.pk }}">Edit</a>
+                            <a href="/post/post_delete/{{ post.pk }}">Delete</a>
+                        </div>
+                    </li>
+                    <li>
+                        {% if post.title %}
+                            {{ post.title }}
+                        {% endif %}
+                    </li>
+                </ul>
+                <article class="post">
+                    <div style="display: flex; flex-direction: column; justify-content: center; font-size: large ">
+                        <br>
+                        {% if post.image %}
+                            <img style="height: 500px;" src="{{ post.image.url }}">
+                        {% endif %}
+                        {% if post.content %}
+                            <div style="font-size: larger; padding: 20px">
+                                {{ post.content }}
+                            </div>
+                        {% endif %}
+                        <br>
+                        <div style="font-size: medium; color: #504f4f;">
+                            {% l_cnt post.pk %} likes
+                            <br>
+                            {% c_cnt post.pk %} comments
+                            <form method="post" action="{% url 'comment' post.pk %}">
+                                {% csrf_token %}
+                                {% if post|l_ch:user %}
+                                    <button class="btn-search" id="demo">
+                                        <a type="button" class="button-caballo " role="button"
+                                           href="{% url 'like' post.pk %}">like</a>
+                                    </button>
+                                    <br>
+                                {% else %}
+                                    <button class="btn-search" id="demo">
+                                        <a type="button" class="button-caballo " role="button"
+                                           href="{% url 'un_like' post.pk %}">un like</a>
+                                    </button>
+                                    <br>
+                                {% endif %}
+                                <form method="post" action="{% url 'comment' post.pk %}">
+                                    {% csrf_token %}
+                                    <input placeholder="comment" type="text" name="note">
+                                    <button class="btn-search" type="submit" value="comment_btn">comment</button>
+                                    <br>
+                                </form>
+                            </form>
+                            {% show_comments post.pk user %}
+                            <br>
+                        </div>
+                    </div>
+                    <div style="font-size:small; color: #a79b9d ">
+                        {{ post.age }}
+                    </div>
+                    <br>
+                    <hr>
+                    <br>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <h1>No Post!</h1>
+    {% endif %}
+{% endblock %}

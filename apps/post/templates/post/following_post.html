@@ -1,0 +1,69 @@
+{% extends 'account/profile.html' %}
+{% load static %}
+{% load post_custom_tags %}
+{% block title %}follower{% endblock %}
+{% block header %}{{ username }}{% endblock %}
+{% block content %}
+    {% if posts %}
+        <div class="posts">
+            {% for post in posts %}
+                <article class="post">
+                    <div style="display: flex; flex-direction: column; justify-content: center; font-size: large; ">
+                        <br>
+                        {% if post.title %}
+                            {{ post.title }}
+                        {% endif %}
+                        {% if post.image %}
+                            <img style="height: 500px;" src="{{ post.image.url }}">
+                        {% endif %}
+                        {% if post.content %}
+                            <div style="font-size: larger; padding: 20px">
+                                {{ post.content }}
+                            </div>
+                        {% endif %}
+                        <br>
+                        <br>
+                        <div style="font-size: medium; color: #504f4f;">
+                            {% l_cnt post.pk %} likes
+                            <br>
+                            {% c_cnt post.pk %} comments
+                            <form method="post" action="{% url 'comment' post.pk %}">
+                                {% csrf_token %}
+                                {% if post|l_ch:user %}
+                                    <button class="btn-search" id="demo">
+                                        <a type="button" class="button-caballo " role="button"
+                                           href="{% url 'like' post.pk %}">like</a>
+                                    </button>
+                                    <br>
+                                {% else %}
+                                    <button class="btn-search" id="demo">
+                                        <a type="button" class="button-caballo " role="button"
+                                           href="{% url 'un_like' post.pk %}">un like</a>
+                                    </button>
+                                    <br>
+                                {% endif %}
+                                <form method="post" action="{% url 'comment' post.pk %}">
+                                    {% csrf_token %}
+                                    <input placeholder="comment" type="text" name="note">
+                                    <button class="btn-search" type="submit" value="comment_btn">comment</button>
+                                    <br>
+                                </form>
+                            </form>
+                            {% show_comments post.pk user %}
+                            <br>
+                        </div>
+                    </div>
+                    <br>
+                    <div style="font-size:small; color: #a79b9d ">
+                        {{ post.age }}
+                    </div>
+                    <br>
+                    <hr>
+                    <br>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <h1>No posts!</h1>
+    {% endif %}
+{% endblock %}

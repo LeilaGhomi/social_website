@@ -1,0 +1,22 @@
+{% extends 'account/profile.html' %}
+{% block header %}{{ username }}{% endblock %}
+{% block content %}
+    <form class="form" autocomplete="on" action="">
+        <input type="text" list="user_list" placeholder="Text to search" name="search_text">
+        <datalist id="user_list">
+            {% if results %}
+                {% for result in results %}
+                    <option value="{{ result.username }}">
+                {% endfor %}
+                </datalist>
+                <button class="btn-search" type="submit">Search</button>
+                </form>
+                <ul>
+                    {% for obj in users %}
+                        <li><a style="font-size: 30px" href={% url 'user_detail' obj.id %}>{{ obj.username }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p style="font-size: 35px">No results!</p>
+            {% endif %}
+{% endblock %}

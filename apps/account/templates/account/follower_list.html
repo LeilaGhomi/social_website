@@ -1,0 +1,20 @@
+{% extends 'account/profile.html' %}
+{% block title %}follower{% endblock %}
+{% block header %}{{ username }}{% endblock %}
+{% block content %}
+
+    {% if users %}
+        <div class="form">
+            <p>followers</p>
+            <ul>
+                {% for obj in users %}
+                    <li><a href={% url 'user_detail' obj.user_id %}>{{ obj }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% else %}
+        <h1 style="color: #642f5c">No follower!</h1>
+    {% endif %}
+{% endblock %}
+
+

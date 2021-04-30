@@ -1,0 +1,10 @@
+{% extends 'account/profile.html' %}
+
+{% block content %}
+    <form class="form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="btn-changpss" type="submit" value="Save">
+    </form>
+
+{% endblock %}

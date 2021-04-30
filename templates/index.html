@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'user/style.css' %}">
+    <title> User Login</title>
+</head>
+<body>
+<div class="login">
+    <br>
+    <div class="message"><p>{{ message }}</p></div>
+    <div class="message">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <h class="text">To Share :)</h>
+    <form method="post" class="login_form">
+        {% csrf_token %}
+        <label>
+            <input class="log_input" placeholder=" username" type="text" name="username">
+        </label>
+        <br>
+        <label>
+            <input class="log_input" placeholder=" password" type="password" name="password">
+        </label>
+        <br>
+        <input type="submit" value="log in" class="log_in">
+    </form>
+    <div class="sign_up"><br> &nbsp;Don't have an account? <br><a href={% url "register" %}> Sign up</a></div>
+</div>
+
+</body>
+</html>

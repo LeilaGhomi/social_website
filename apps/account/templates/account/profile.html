@@ -1,0 +1,62 @@
+{% load static %}
+{% load user_tags %}
+{% load post_custom_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'user/pro_style.css' %}">
+    <meta charset="UTF-8">
+    <title>{% block title %}Profile{% endblock %}</title>
+</head>
+<body>
+<header>
+    {% if request.user.pro_pic %}
+        <img src="{{ request.user.pro_pic.url }}" style="width: 60px; height: 60px; border-radius: 50%">
+    {% else %}
+        <img src="{% static 'images/def.jpg' %}" style="width: 60px; height: 60px; border-radius: 50%">
+    {% endif %}
+    &nbsp; {{ request.user.username }}</header>
+<nav class="header">
+    <ul style="display: flex; justify-content: space-around">
+        <li><a class="test" href="{% url 'add_new_post' %}">ADD New Post<span
+                class="svg">  {% include 'account/img/new.svg' %}</span></a></li>
+        <li><a class="test" href="{% url 'search' %}">Search<span
+                class="svg"> {% include 'account/img/search (1).svg' %} </span></a></li>
+        <li><a class="test" href="{% url 'logout' %}">Logout<span
+                class="svg"> {% include 'account/img/logout.svg' %} </span></a></li>
+        <li><a class="test" href="{% url 'edit' request.user.id %}">Edit Profile<span
+                class="svg"> {% include 'account/img/resume.svg' %} </span></a></li>
+        <li><a class="test" href="{% url 'following_post' %}">Posts <span
+                class="svg"> {% include 'account/img/social-media.svg' %} </span></a></li>
+        <li><a class="test" href="{% url 'change_pass' %}">Change Pass <span
+                class="svg"> {% include 'account/img/rotation-lock.svg' %} </span></a></li>
+    </ul>
+</nav>
+<aside>
+    <div class="sidebar">
+        <ul>
+            <li><a href="{% url 'my_follower' %}">Followers :{% follower_cnt request %}</a></li>
+            <li><a href="{% url 'my_following' %}">Following :{% following_cnt request %}</a></li>
+            <li><a href="{% url 'my_post_list' %}">My Posts :{% p_cnt request.user.id %}</a></li>
+            <li><a href="{% url 'Request_List' %}">requests : {% r_cnt request %} </a></li>
+        </ul>
+    </div>
+</aside>
+<main>
+    <div class="main">
+        {% block content %}
+            <div style="background-color: #e5b0b0; font-size: large; display: flex; align-items: center; justify-content: center">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}" role="alert">
+                            {{ message }}
+                            <br>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        {% endblock %}
+    </div>
+</main>
+</body>
+</html>

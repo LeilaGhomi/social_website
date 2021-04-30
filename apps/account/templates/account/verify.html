@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'user/style.css' %}">
+    <title>verify</title>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>verify</title>
+    </head>
+<body>
+<nav class="header">
+    <ul style="display: flex; justify-content: space-around">
+        <li><a class="test" href="">Search</a></li>
+        <li><a class="test" href="">About us</a></li>
+        <li><a class="test" href="">Contact us </a></li>
+        <li><a class="test" href="{% url 'login' %}">Login </a></li>
+    </ul>
+</nav>
+<div style="background-color: #e5b0b0; font-size: large; display: flex; align-items: center; justify-content: center">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" role="alert">
+                {{ message }}
+                <br>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+<div style="display: flex; justify-content: center; flex-direction: column; align-items: center">
+    <div>
+        <h2>Register</h2>
+    </div>
+    <img src="{% static 'images/otp.png' %}" id="icon" alt="User Icon" width="200" height="200"/>
+    <form action="." method="post">
+        {% csrf_token %}
+        <input type="text" value="{{ mobile }}" readonly disabled class="fadeIn second" name="mobile">
+        <br><input type="text" required class="fadeIn second" name="otp" placeholder="Enter OTP">
+        <br><br><input type="submit" value="Check OTP"
+                       style="width: 177px; height:30px ;background-color: #d3bad9; font-size: medium">
+    </form>
+</div>
+</body>
+</html>

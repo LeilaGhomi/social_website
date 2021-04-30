@@ -1,0 +1,44 @@
+{% extends 'account/profile.html' %}
+{% load post_custom_tags %}
+{% block title %}Post Detail{% endblock %}
+{% block content %}
+    <div class="">
+        {% if user == post.account_id %}
+            <ul style="margin-top: 0">
+                <li>
+                    <button class="btn-post" id="demo"><a href="/post/edit_post/{{ post.pk }}">Edit</a></button>
+                    <button class="btn-post" id="demo"><a href="/post/post_delete/{{ post.pk }}">Delete</a></button>
+                </li>
+            </ul>
+        {% endif %}
+        <table>
+            <tr>{{ post.title }}</tr>
+            </br><br>
+            {% if post.image %}
+                <img src="{{ post.image.url }}" width="150px" height="150px">
+            {% endif %}
+            <br>
+            <tr>{{ post.content }}</tr>
+            <br></br>
+            <tr>{{ post.age }}</tr>
+            <br>
+            <tr>likes:{% l_cnt post.pk %}</tr>
+            <br>
+            <tr>Comments:<br>{% show_comments post.pk user %}</tr>
+        </table>
+        <form method="post" action="{% url 'comment' post.pk %}">
+            {% csrf_token %}
+            <button class="btn-search" id="demo">
+                <input type="hidden" name="next" value="{{ request.path }}">
+                <a type="button" class="button-caballo " role="button" href="{% url 'like' post.pk %}">like</a>
+            </button>
+            <form method="post" action="{% url 'comment' post.pk %}">
+                {% csrf_token %}
+                <input placeholder=" comment" type="text" name="note">
+                <input type="hidden" name="next" value="{{ request.path }}">
+                <button class="btn-search" type="submit" value="comment_btn">comment</button>
+            </form>
+        </form>
+        </form>
+    </div>
+{% endblock %}
